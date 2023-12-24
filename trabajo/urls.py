@@ -1,11 +1,15 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
-    path("", views.home2),
-    path("agregarCurso", views.agregar_curso, name='agregarCurso'),
-    path("agregarProfesor", views.agregar_profesor, name='agregarProfesor'),
-    path("agregarEntregable", views.agregar_entregable, name='agregarEntregable'),
-    path("agregarEstudiante", views.agregar_estudiante, name='agregarEstudiante'),
-    path('camada/<int:camada>', views.lista_cursos, name='lista_cursos'),
-]
+    path("", views.index, name='Index'),
+    path("listaClientes", views.leer_clientes, name='listaClientes'),
+    path("listaVentas", views.lista_ventas.as_view(), name='listaVentas'),
+    path("crearCliente", views.crear_cliente, name='crearCliente'),
+    path("comprarProducto", views.comprar_producto, name='comprarProducto'),
+    path("nuevoInsumo", views.crear_insumo, name='nuevoInsumo'),
+    path("busquedaBD", views.busqueda_en_bd, name='busquedaBD'),
+    path('inicio', views.inicio, name='inicio'),
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

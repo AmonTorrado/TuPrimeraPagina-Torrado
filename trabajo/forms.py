@@ -1,25 +1,24 @@
 from django import forms
-from .models import Estudiante,Profesor,Curso,Entregable
-
-class EstudianteForm(forms.ModelForm):
-    class Meta:
-        model = Estudiante
-        fields = ['nombre', 'apellido', 'email']
-
-class ProfesorForm(forms.ModelForm):
-    class Meta:
-        model = Profesor
-        fields = ['nombre', 'apellido', 'email','profesion']
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from .models import Insumo, Producto
+    
+class Meta:
+    model = User
+    fields = ["username", "email", "password1", "password2"]
+    help_texts = {k:"" for k in fields}
         
-
-class CursoForm(forms.ModelForm):
+class ClienteFormulario(forms.Form):
+    nombre= forms.CharField()
+    nro_cuit = forms.IntegerField()
+    email = forms. EmailField()
+    
+class InsumoForm(forms.Form):
     class Meta:
-        model = Curso
-        fields = ['nombre', 'camada']
-        
+        model = Insumo
+        fields = ['nombre', 'descripción', 'unidad', 'cantidad']
 
-class EntregableForm(forms.ModelForm):
+class ProductoForm(forms.Form):
     class Meta:
-        model = Entregable
-        fields = ['nombre', 'fechadeentrega', 'entregado']
-        
+        model = Producto
+        fields = ['nombre', 'Descripción', 'Cantidad en stock']
